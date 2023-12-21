@@ -19,24 +19,30 @@ class App extends Component {
     this.setState({items: items})
   }
 
+  
   addItem = (item) => {
-    this.state.items.length > 0 ? (
-      item.id = this.state.items[this.state.items.length - 1].id + 1 
-    ) : item.id = 1
-    console.log(item.id)
-    let items = this.state.items
-    items.push(item)
-    this.setState({items: items})
-  }
+    this.setState({items: [...this.state.items, {id: this.state.items.length > 0 ? (this.state.items[this.state.items.length - 1].id + 1): 1}]
+  })}
+  
+addItem2 = (item) => {
+  this.state.items.length > 0 ? (
+    item.id = this.state.items[this.state.items.length - 1].id + 1 
+  ) : item.id = 1
+  console.log(item.id)
+  let items = this.state.items
+  items.push(item)
+  this.setState({items: items})
+}
 
   render() {
     return (
       <div className="container">
         <h1>Product List React App</h1>
         <div className="table">
-          <Items items={this.state.items} del={this.deleteItem}/>
-          <AddItem add={this.addItem}/>
+          <Items items={this.state.items} del={this.deleteItem} add={this.addItem}/>
+          <AddItem add={this.addItem2}/>
           <Total items={this.state.items}/>
+          
         </div>
       </div>
     )
